@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoleMates — Every Step Covered</title>
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --lime: #d4f500; --orange: #ff5c00; --black: #0d0d0d;
+      --white: #fafaf5; --pink: #ff2d78; --blue: #0047ff;
+      --gold: #f5c400; --navy: #0a1628;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.35; }
+
+    .vet-banner { background: linear-gradient(90deg, var(--navy) 0%, #0d1f3c 50%, var(--navy) 100%); border-bottom: 2px solid #1a2e4a; padding: 0.75rem 2rem; }
+    .vet-banner-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
+    .vet-ribbon { font-size: 1.6rem; flex-shrink: 0; }
+    .vet-banner strong { color: var(--gold); font-size: 0.9rem; display: block; margin-bottom: 0.15rem; }
+    .vet-banner span { color: #8aa5cc; font-size: 0.82rem; font-weight: 700; }
+    .vet-link { color: var(--gold); text-decoration: none; }
+    .vet-link:hover { text-decoration: underline; }
+
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 2.5rem; border-bottom: 2px solid #1f1f1f; position: sticky; top: 0; z-index: 100; background: var(--black); }
+    .nav-logo { font-family: 'Boogaloo', cursive; font-size: 1.8rem; color: var(--lime); letter-spacing: 0.02em; }
+    .nav-logo span { color: var(--orange); }
+    nav a { color: var(--white); text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    nav a:hover { color: var(--lime); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .btn-nav { background: var(--lime); color: var(--black); padding: 0.55rem 1.4rem; border-radius: 999px; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: transform 0.15s, background 0.2s; }
+    .btn-nav:hover { background: var(--orange); color: var(--white); transform: scale(1.05); }
+
+    .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; position: relative; overflow: hidden; }
+    .hero-bg-circle { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.18; pointer-events: none; }
+    .c1 { width: 500px; height: 500px; background: var(--lime); top: -100px; left: -100px; animation: float1 8s ease-in-out infinite; }
+    .c2 { width: 400px; height: 400px; background: var(--orange); bottom: -80px; right: -80px; animation: float2 10s ease-in-out infinite; }
+    .c3 { width: 300px; height: 300px; background: var(--pink); top: 40%; left: 55%; animation: float1 12s ease-in-out infinite reverse; }
+    @keyframes float1 { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-30px) scale(1.05)} }
+    @keyframes float2 { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(25px) scale(0.97)} }
+    .hero-tag { background: var(--navy); color: var(--gold); border: 1.5px solid #1a3060; display: inline-block; padding: 0.35rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both; }
+    .hero h1 { font-family: 'Boogaloo', cursive; font-size: clamp(3.5rem, 10vw, 8rem); line-height: 1; letter-spacing: -0.01em; animation: slideUp 0.7s cubic-bezier(.34,1.56,.64,1) 0.1s both; }
+    .hero h1 .highlight { color: var(--lime); position: relative; display: inline-block; }
+    .hero h1 .highlight::after { content: ''; position: absolute; left: 0; bottom: 4px; width: 100%; height: 6px; background: var(--orange); border-radius: 3px; z-index: -1; }
+    .hero-sub { margin-top: 1.5rem; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #aaa; max-width: 560px; font-weight: 700; animation: slideUp 0.7s cubic-bezier(.34,1.56,.64,1) 0.2s both; }
+    .hero-sub strong { color: var(--white); }
+    .hero-ctas { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: slideUp 0.7s cubic-bezier(.34,1.56,.64,1) 0.3s both; }
+    .btn-primary { background: var(--lime); color: var(--black); padding: 1rem 2.4rem; border-radius: 999px; font-family: 'Boogaloo', cursive; font-size: 1.3rem; letter-spacing: 0.04em; cursor: pointer; border: none; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 4px 4px 0 var(--orange); }
+    .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--orange); }
+    .btn-secondary { background: transparent; color: var(--white); padding: 1rem 2.4rem; border-radius: 999px; font-family: 'Boogaloo', cursive; font-size: 1.3rem; cursor: pointer; border: 2px solid #333; transition: border-color 0.2s, color 0.2s; }
+    .btn-secondary:hover { border-color: var(--lime); color: var(--lime); }
+    .hero-stats { margin-top: 4rem; display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; animation: fadeIn 1s 0.5s both; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Boogaloo', cursive; font-size: 2.8rem; color: var(--lime); }
+    .stat-label { font-size: 0.8rem; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    .section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { display: inline-block; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; color: var(--orange); margin-bottom: 1rem; }
+    .section-title { font-family: 'Boogaloo', cursive; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; }
+    .section-title span { color: var(--lime); }
+
+    .steps { margin-top: 3.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .step { background: #141414; border: 1.5px solid #222; border-radius: 20px; padding: 2rem; position: relative; overflow: hidden; transition: transform 0.2s, border-color 0.2s; }
+    .step:hover { transform: translateY(-4px); border-color: var(--lime); }
+    .step-num { font-family: 'Boogaloo', cursive; font-size: 5rem; color: #1e1e1e; position: absolute; top: -8px; right: 16px; line-height: 1; user-select: none; }
+    .step-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .step h3 { font-size: 1.2rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .step p { color: #888; font-size: 0.9rem; line-height: 1.6; }
+
+    .veteran-section { background: linear-gradient(135deg, #080f1e 0%, #0a1628 60%, #080f1e 100%); border-top: 2px solid #1a2e4a; border-bottom: 2px solid #1a2e4a; padding: 6rem 2rem; }
+    .veteran-inner { max-width: 1100px; margin: 0 auto; }
+    .vet-section-label { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 1rem; display: block; }
+    .vet-section-title { font-family: 'Boogaloo', cursive; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; color: var(--white); margin-bottom: 1rem; }
+    .vet-section-title span { color: var(--gold); }
+    .vet-section-sub { color: #7a9abf; font-size: 1rem; font-weight: 700; max-width: 580px; line-height: 1.7; margin-bottom: 3rem; }
+    .vet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .vet-card { background: rgba(255,255,255,0.03); border: 1.5px solid #1a2e4a; border-radius: 20px; padding: 2rem; transition: transform 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
+    .vet-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 20px 20px 0 0; }
+    .vet-card.gold::before { background: var(--gold); }
+    .vet-card.blue-c::before { background: #4a8fff; }
+    .vet-card.lime-c::before { background: var(--lime); }
+    .vet-card:hover { transform: translateY(-4px); border-color: #2a4a7a; }
+    .vet-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .vet-card h3 { font-size: 1.15rem; font-weight: 900; margin-bottom: 0.5rem; color: var(--white); }
+    .vet-card p { color: #7a9abf; font-size: 0.9rem; line-height: 1.6; }
+    .vet-badge { display: inline-block; margin-top: 1rem; background: rgba(245,196,0,0.12); color: var(--gold); border: 1px solid rgba(245,196,0,0.3); padding: 0.25rem 0.8rem; border-radius: 999px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; }
+    .testimonials { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .testimonial { background: rgba(255,255,255,0.02); border: 1.5px solid #1a2e4a; border-radius: 16px; padding: 1.5rem; }
+    .testimonial-quote { color: #9ab5d4; font-size: 0.9rem; line-height: 1.7; font-style: italic; margin-bottom: 1rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.7rem; }
+    .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; background: #1a2e4a; flex-shrink: 0; }
+    .testimonial-name { font-weight: 900; font-size: 0.85rem; color: var(--white); }
+    .testimonial-title { font-size: 0.75rem; color: var(--gold); font-weight: 700; }
+
+    .matcher-section { background: #0d0d0d; border-top: 2px solid #1a1a1a; border-bottom: 2px solid #1a1a1a; }
+    .matcher-inner { max-width: 900px; margin: 0 auto; padding: 6rem 2rem; text-align: center; }
+    .mode-toggle { display: inline-flex; background: #111; border: 2px solid #222; border-radius: 999px; padding: 4px; gap: 4px; margin-bottom: 2.5rem; }
+    .mode-btn { padding: 0.6rem 1.4rem; border-radius: 999px; border: none; font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 900; cursor: pointer; transition: all 0.2s; color: #666; background: transparent; letter-spacing: 0.04em; }
+    .mode-btn.active { background: var(--lime); color: var(--black); }
+    .mode-btn.active-vet { background: var(--gold); color: var(--black); }
+    .matcher-view { display: none; }
+    .matcher-view.visible { display: block; }
+
+    .feet-selector { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: start; margin-bottom: 2rem; }
+    @media (max-width: 640px) { .feet-selector { grid-template-columns: 1fr; } }
+    .foot-panel { background: #111; border: 2px solid #1e1e1e; border-radius: 20px; padding: 1.5rem; transition: border-color 0.3s; }
+    .foot-panel.active-left { border-color: var(--lime); }
+    .foot-panel.active-right { border-color: var(--orange); }
+    .foot-panel.skipped { opacity: 0.45; border-color: #333; border-style: dashed; }
+    .foot-label { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem; justify-content: center; }
+    .foot-emoji { font-size: 1.4rem; }
+    .foot-title { font-family: 'Boogaloo', cursive; font-size: 1.3rem; color: var(--white); }
+    .foot-selected { font-family: 'Boogaloo', cursive; font-size: 1.3rem; margin-left: auto; background: #1a1a1a; border-radius: 8px; padding: 0.15rem 0.6rem; min-width: 40px; }
+    #leftSelected { color: var(--lime); }
+    #rightSelected { color: var(--orange); }
+    .not-needed-toggle { margin-top: 0.8rem; text-align: center; }
+    .not-needed-btn { background: transparent; border: 1.5px dashed #333; color: #555; padding: 0.35rem 1rem; border-radius: 999px; font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 900; cursor: pointer; transition: all 0.2s; }
+    .not-needed-btn:hover { border-color: #555; color: #888; }
+    .not-needed-btn.active { border-color: #ff5c0066; color: var(--orange); background: rgba(255,92,0,0.07); }
+    .feet-divider { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; padding-top: 3.5rem; }
+    .divider-line { width: 2px; height: 40px; background: #2a2a2a; border-radius: 2px; }
+    .divider-icon { font-size: 1.4rem; }
+
+    .single-shoe-view { text-align: center; }
+    .vet-mode-label { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245,196,0,0.1); color: var(--gold); border: 1.5px solid rgba(245,196,0,0.25); padding: 0.5rem 1.2rem; border-radius: 999px; font-size: 0.82rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2rem; }
+    .foot-choice { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+    .foot-choice-btn { padding: 0.9rem 2rem; border-radius: 14px; border: 2px solid #2a2a2a; background: #111; font-family: 'Boogaloo', cursive; font-size: 1.2rem; color: var(--white); cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+    .foot-choice-btn span.fc-icon { font-size: 1.8rem; }
+    .foot-choice-btn:hover { border-color: var(--gold); }
+    .foot-choice-btn.selected-left { background: rgba(212,245,0,0.1); border-color: var(--lime); color: var(--lime); }
+    .foot-choice-btn.selected-right { background: rgba(255,92,0,0.1); border-color: var(--orange); color: var(--orange); }
+    .single-size-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem; }
+
+    .size-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .size-btn { width: 50px; height: 44px; border-radius: 10px; border: 2px solid #2a2a2a; background: #141414; color: var(--white); font-family: 'Boogaloo', cursive; font-size: 0.95rem; cursor: pointer; transition: all 0.15s; }
+    .size-btn:hover { border-color: #555; color: #ddd; }
+    .size-btn.active-left { background: var(--lime); color: var(--black); border-color: var(--lime); transform: scale(1.08); }
+    .size-btn.active-right { background: var(--orange); color: var(--white); border-color: var(--orange); transform: scale(1.08); }
+    .size-btn.active-single { background: var(--gold); color: var(--black); border-color: var(--gold); transform: scale(1.08); }
+
+    .match-result { margin-top: 2rem; min-height: 80px; font-size: 1.05rem; color: #555; font-weight: 700; transition: all 0.3s; }
+    .match-result.found { color: var(--white); }
+    .match-count { font-family: 'Boogaloo', cursive; font-size: 2rem; color: var(--lime); }
+    .match-count-r { font-family: 'Boogaloo', cursive; font-size: 2rem; color: var(--orange); }
+    .match-count-g { font-family: 'Boogaloo', cursive; font-size: 2rem; color: var(--gold); }
+    .match-chip { display: inline-block; background: #1a1a1a; border-radius: 999px; padding: 0.3rem 1rem; margin: 0.3rem; font-size: 0.85rem; color: #aaa; font-weight: 700; border: 1.5px solid #2a2a2a; }
+
+    .features-grid { margin-top: 3.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; }
+    .feature-card { background: linear-gradient(135deg, #151515 0%, #111 100%); border: 1.5px solid #222; border-radius: 20px; padding: 2rem; transition: transform 0.2s, border-color 0.2s; }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-card:nth-child(1):hover { border-color: var(--lime); }
+    .feature-card:nth-child(2):hover { border-color: var(--gold); }
+    .feature-card:nth-child(3):hover { border-color: var(--orange); }
+    .feature-card:nth-child(4):hover { border-color: var(--pink); }
+    .feature-card:nth-child(5):hover { border-color: var(--blue); }
+    .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.2rem; }
+    .fi-lime { background: rgba(212,245,0,0.12); } .fi-gold { background: rgba(245,196,0,0.12); }
+    .fi-orange { background: rgba(255,92,0,0.12); } .fi-pink { background: rgba(255,45,120,0.12); } .fi-blue { background: rgba(0,71,255,0.12); }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .feature-card p { color: #777; font-size: 0.9rem; line-height: 1.6; }
+
+    .cta-band { background: var(--lime); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+    .cta-band::before { content: '👟 👟 👟 👟 👟 👟 👟 👟 👟 👟'; position: absolute; top: 12px; left: 0; right: 0; font-size: 1.2rem; opacity: 0.15; letter-spacing: 0.5rem; white-space: nowrap; overflow: hidden; }
+    .cta-band h2 { font-family: 'Boogaloo', cursive; font-size: clamp(2rem, 6vw, 4rem); color: var(--black); line-height: 1.1; margin-bottom: 1rem; }
+    .cta-band > p { color: #333; font-size: 1rem; max-width: 480px; margin: 0 auto 2rem; font-weight: 700; }
+    .email-form { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+    .email-form input { padding: 0.9rem 1.4rem; border-radius: 999px; border: 2.5px solid var(--black); background: var(--white); font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; width: 280px; outline: none; }
+    .email-form input:focus { border-color: var(--orange); }
+    .btn-cta { background: var(--black); color: var(--lime); padding: 0.9rem 1.8rem; border-radius: 999px; font-family: 'Boogaloo', cursive; font-size: 1.2rem; border: none; cursor: pointer; transition: background 0.2s, color 0.2s, transform 0.15s; }
+    .btn-cta:hover { background: var(--orange); color: var(--white); transform: scale(1.04); }
+    .vet-cta-note { margin-top: 1.2rem; font-size: 0.82rem; color: #333; font-weight: 900; }
+    .vet-cta-note a { color: #0a1628; text-decoration: underline; }
+
+    footer { padding: 2.5rem 2.5rem; border-top: 2px solid #1a1a1a; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Boogaloo', cursive; font-size: 1.5rem; color: var(--lime); }
+    .footer-logo span { color: var(--orange); }
+    footer p { color: #444; font-size: 0.85rem; }
+
+    @keyframes popIn { from { opacity: 0; transform: scale(0.7); } to { opacity:1; transform: scale(1); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity:1; } }
+  </style>
+</head>
+<body>
+
+<div class="vet-banner">
+  <div class="vet-banner-inner">
+    <span class="vet-ribbon">🎖️</span>
+    <div>
+      <strong>Honoring Those Who Served</strong>
+      <span>SoleMates offers free lifetime membership and priority matching for U.S. veterans and active-duty service members. <a href="#veteran-section" class="vet-link">Learn more ↓</a></span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-logo">Sole<span>Mates</span></div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#veteran-section">Veterans</a>
+    <a href="#features">Features</a>
+    <a href="#join" class="btn-nav">Get Early Access</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-circle c3"></div>
+  <div class="hero-tag">🇺🇸 Proudly supporting veterans &amp; the disability community</div>
+  <h1>Every Step<br><span class="highlight">Covered</span></h1>
+  <p class="hero-sub">Different-sized feet? Only need one shoe? <strong>Match with someone who needs the other foot or the other size</strong> — split a pair, pay half, walk your way.</p>
+  <div class="hero-ctas">
+    <button class="btn-primary" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Find My SoleMate 👟</button>
+    <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See how it works</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3.2k</div><div class="stat-label">Pairs Matched</div></div>
+    <div class="stat"><div class="stat-num">$94</div><div class="stat-label">Avg. Savings</div></div>
+    <div class="stat"><div class="stat-num">180+</div><div class="stat-label">Sizes Covered</div></div>
+    <div class="stat"><div class="stat-num">1,400+</div><div class="stat-label">Veterans Served</div></div>
+  </div>
+</section>
+
+<div id="how">
+  <section class="section">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Your left. Their right.<br><span>Or just one. That works too.</span></h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-icon">📏</div><h3>Tell Us Your Needs</h3><p>Enter your left and right foot sizes — or select Single Shoe Mode if you only need one. Amputees and veterans get priority queuing.</p></div>
+      <div class="step"><div class="step-num">2</div><div class="step-icon">🔍</div><h3>Smart Matching</h3><p>We find your complement — someone whose need mirrors yours, whether that's an opposite foot, opposite size, or single shoe.</p></div>
+      <div class="step"><div class="step-num">3</div><div class="step-icon">💸</div><h3>Buy One Pair Together</h3><p>Coordinate a single purchase, split the cost, and each receive only the shoe you actually need. Zero waste, zero guilt.</p></div>
+      <div class="step"><div class="step-num">4</div><div class="step-icon">⭐</div><h3>Rate &amp; Repeat</h3><p>Build a trusted SoleMate reputation. The more you match, the faster future matches arrive.</p></div>
+    </div>
+  </section>
+</div>
+
+<div id="veteran-section" class="veteran-section">
+  <div class="veteran-inner">
+    <span class="vet-section-label">🎖️ For Veterans, Amputees &amp; the Disability Community</span>
+    <h2 class="vet-section-title">You gave everything.<br><span>You shouldn't pay for both shoes.</span></h2>
+    <p class="vet-section-sub">Nearly 2 million Americans are living with limb loss — including over 1,800 veterans who lost limbs in service since 2001. SoleMates was built with this community in mind. If you only need one shoe, you should only pay for one shoe. Full stop.</p>
+    <div class="vet-grid">
+      <div class="vet-card gold">
+        <div class="vet-card-icon">🎖️</div>
+        <h3>Free Lifetime Membership</h3>
+        <p>Verified U.S. veterans and active-duty service members receive free lifetime access — no subscription, no fees, ever.</p>
+        <span class="vet-badge">Veterans Only</span>
+      </div>
+      <div class="vet-card blue-c">
+        <div class="vet-card-icon">⚡</div>
+        <h3>Priority Queue Matching</h3>
+        <p>Single-shoe users are moved to the front of the match queue. Your listing is always prominently visible to our full community.</p>
+        <span class="vet-badge">Single Shoe Mode</span>
+      </div>
+      <div class="vet-card lime-c">
+        <div class="vet-card-icon">📦</div>
+        <h3>Concierge Shipping</h3>
+        <p>We coordinate the purchase and split-ship both shoes to their respective owners. You just provide your address — we handle the rest.</p>
+        <span class="vet-badge">Handled For You</span>
+      </div>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p class="testimonial-quote">"Lost my right leg in Fallujah in 2005. For 20 years I've been throwing away a perfectly good left shoe with every pair I buy. SoleMates finally solved that."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Marcus T.</div><div class="testimonial-title">U.S. Army Veteran, OIF</div></div></div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-quote">"My right foot is a full size larger than my left. I've spent thousands over the years buying two pairs just to get the right fit. Not anymore."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Diane R.</div><div class="testimonial-title">Member since 2025</div></div></div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-quote">"The VA doesn't cover shoes. Finding someone who needed my leftover left boot on here literally saved me $140 on my last pair of work boots."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">James K.</div><div class="testimonial-title">U.S. Marine Corps Veteran</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="matcher-section">
+  <div class="matcher-inner">
+    <div class="section-label">Try it out</div>
+    <h2 class="section-title" style="color:var(--white)">Find your <span>perfect match</span></h2>
+    <p style="color:#666;margin-top:0.8rem;font-weight:700;margin-bottom:2rem;">Choose your situation below and see who's waiting for you right now 👇</p>
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="modeBtnBoth" onclick="setMode('both')">👣 Different Sizes</button>
+      <button class="mode-btn" id="modeBtnSingle" onclick="setMode('single')">👟 Single Shoe</button>
+    </div>
+
+    <div class="matcher-view visible" id="viewBoth">
+      <div class="feet-selector">
+        <div class="foot-panel" id="leftPanel">
+          <div class="foot-label"><span class="foot-emoji">🦶</span><span class="foot-title">Left Foot</span><span class="foot-selected" id="leftSelected">—</span></div>
+          <div class="size-grid" id="leftGrid"></div>
+          <div class="not-needed-toggle"><button class="not-needed-btn" id="leftSkipBtn" onclick="toggleSkip('left')">I don't need a left shoe</button></div>
+        </div>
+        <div class="feet-divider"><div class="divider-line"></div><div class="divider-icon">↔️</div><div class="divider-line"></div></div>
+        <div class="foot-panel" id="rightPanel">
+          <div class="foot-label"><span class="foot-emoji" style="transform:scaleX(-1);display:inline-block">🦶</span><span class="foot-title">Right Foot</span><span class="foot-selected" id="rightSelected">—</span></div>
+          <div class="size-grid" id="rightGrid"></div>
+          <div class="not-needed-toggle"><button class="not-needed-btn" id="rightSkipBtn" onclick="toggleSkip('right')">I don't need a right shoe</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matcher-view" id="viewSingle">
+      <div class="single-shoe-view">
+        <div class="vet-mode-label">🎖️ Single Shoe Mode — Only pay for what you need</div>
+        <p style="color:#666;font-weight:700;margin-bottom:1.5rem;">Which foot do you need a shoe for?</p>
+        <div class="foot-choice">
+          <button class="foot-choice-btn" id="fcLeft" onclick="setSingleFoot('left')"><span class="fc-icon">🦶</span><span>Left Foot</span></button>
+          <button class="foot-choice-btn" id="fcRight" onclick="setSingleFoot('right')"><span class="fc-icon" style="transform:scaleX(-1);display:inline-block">🦶</span><span>Right Foot</span></button>
+        </div>
+        <p style="color:#555;font-weight:700;margin-bottom:1rem;font-size:0.9rem;" id="singleSizeLabel">Select your foot, then pick your size:</p>
+        <div class="single-size-grid" id="singleGrid"></div>
+      </div>
+    </div>
+
+    <div class="match-result" id="matchResult">Select your mode and sizes to find your SoleMates!</div>
+  </div>
+</div>
+
+<div id="features">
+  <section class="section">
+    <div class="section-label">Why SoleMates</div>
+    <h2 class="section-title">Built for everyone<br><span>who needs it</span></h2>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon fi-lime">👣</div><h3>Mismatched Feet</h3><p>About 60% of people have feet of different sizes. Now you only pay for the size you actually need on each foot.</p></div>
+      <div class="feature-card"><div class="feature-icon fi-gold">🎖️</div><h3>Single-Shoe Support</h3><p>For veterans, amputees, and anyone who needs just one shoe — find your match and pay exactly half. Every time.</p></div>
+      <div class="feature-card"><div class="feature-icon fi-orange">🔒</div><h3>Verified Community</h3><p>Every SoleMate is ID-verified and community-rated. Safe, trusted, and accountable — always.</p></div>
+      <div class="feature-card"><div class="feature-icon fi-pink">⚡</div><h3>Instant Matching</h3><p>Our algorithm finds your complement in seconds — across hundreds of brands, styles, and size combinations.</p></div>
+      <div class="feature-card"><div class="feature-icon fi-blue">🌍</div><h3>Concierge Shipping</h3><p>We handle the split-shipping so each person gets only the shoe they need, delivered straight to their door.</p></div>
+    </div>
+  </section>
+</div>
+
+<div class="cta-band" id="join">
+  <h2>Every step forward<br>starts here 👟</h2>
+  <p>Join thousands of SoleMates — including 1,400+ veterans — already walking away with exactly the shoe they need.</p>
+  <div class="email-form">
+    <input type="email" placeholder="your@email.com" id="emailInput" />
+    <button class="btn-cta" onclick="handleSignup()">Get Early Access</button>
+  </div>
+  <p id="signupMsg" style="margin-top:1rem;color:#333;font-weight:900;min-height:1.5rem;"></p>
+  <p class="vet-cta-note">🎖️ Veteran or active-duty? <a href="#">Check "Veteran" during signup for free lifetime access.</a></p>
+</div>
+
+<footer>
+  <div class="footer-logo">Sole<span>Mates</span></div>
+  <p>© 2026 SoleMates. Every step covered. &nbsp;|&nbsp; 🎖️ Proud supporter of veteran communities.</p>
+</footer>
+
+<script>
+  const sizes = ['5','5.5','6','6.5','7','7.5','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','13','14'];
+  const fakeUsers = [];
+  const rng = n => Math.floor(Math.random() * n);
+  for (let i = 0; i < 700; i++) {
+    const t = Math.random();
+    if (t < 0.12) fakeUsers.push({ type: 'single', foot: 'left', size: sizes[rng(sizes.length)] });
+    else if (t < 0.24) fakeUsers.push({ type: 'single', foot: 'right', size: sizes[rng(sizes.length)] });
+    else fakeUsers.push({ type: 'both', left: sizes[rng(sizes.length)], right: sizes[rng(sizes.length)] });
+  }
+
+  let currentMode = 'both';
+  let selectedLeft = null, selectedRight = null;
+  let leftSkipped = false, rightSkipped = false;
+  let singleFoot = null, singleSize = null;
+  const resultEl = document.getElementById('matchResult');
+
+  function setMode(mode) {
+    currentMode = mode;
+    document.getElementById('viewBoth').classList.toggle('visible', mode === 'both');
+    document.getElementById('viewSingle').classList.toggle('visible', mode === 'single');
+    document.getElementById('modeBtnBoth').className = 'mode-btn' + (mode === 'both' ? ' active' : '');
+    document.getElementById('modeBtnSingle').className = 'mode-btn' + (mode === 'single' ? ' active-vet' : '');
+    resultEl.className = 'match-result';
+    resultEl.innerHTML = mode === 'both' ? "Select your foot sizes — or skip a foot if you don't need it!" : 'Choose which foot you need a shoe for, then pick your size!';
+  }
+
+  function toggleSkip(foot) {
+    if (foot === 'left') {
+      leftSkipped = !leftSkipped;
+      if (leftSkipped) { selectedLeft = null; document.getElementById('leftSelected').textContent = '—'; document.querySelectorAll('#leftGrid .size-btn').forEach(b => b.classList.remove('active-left')); }
+      document.getElementById('leftPanel').className = 'foot-panel' + (leftSkipped ? ' skipped' : '');
+      document.getElementById('leftSkipBtn').className = 'not-needed-btn' + (leftSkipped ? ' active' : '');
+      document.getElementById('leftSkipBtn').textContent = leftSkipped ? '↩ I do need a left shoe' : "I don't need a left shoe";
+    } else {
+      rightSkipped = !rightSkipped;
+      if (rightSkipped) { selectedRight = null; document.getElementById('rightSelected').textContent = '—'; document.querySelectorAll('#rightGrid .size-btn').forEach(b => b.classList.remove('active-right')); }
+      document.getElementById('rightPanel').className = 'foot-panel' + (rightSkipped ? ' skipped' : '');
+      document.getElementById('rightSkipBtn').className = 'not-needed-btn' + (rightSkipped ? ' active' : '');
+      document.getElementById('rightSkipBtn').textContent = rightSkipped ? '↩ I do need a right shoe' : "I don't need a right shoe";
+    }
+    updateMatch();
+  }
+
+  function setSingleFoot(foot) {
+    singleFoot = foot; singleSize = null;
+    document.getElementById('fcLeft').className = 'foot-choice-btn' + (foot === 'left' ? ' selected-left' : '');
+    document.getElementById('fcRight').className = 'foot-choice-btn' + (foot === 'right' ? ' selected-right' : '');
+    document.querySelectorAll('#singleGrid .size-btn').forEach(b => b.classList.remove('active-single'));
+    document.getElementById('singleSizeLabel').textContent = 'Now pick your ' + foot + ' foot size:';
+    updateMatch();
+  }
+
+  function buildGrid(containerId, foot) {
+    const container = document.getElementById(containerId);
+    sizes.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'size-btn'; btn.textContent = s;
+      btn.onclick = () => {
+        if (foot === 'single') {
+          document.querySelectorAll('#singleGrid .size-btn').forEach(b => b.classList.remove('active-single'));
+          btn.classList.add('active-single'); singleSize = s;
+        } else {
+          container.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active-left','active-right'));
+          btn.classList.add(foot === 'left' ? 'active-left' : 'active-right');
+          if (foot === 'left') { selectedLeft = s; document.getElementById('leftSelected').textContent = s; document.getElementById('leftPanel').className = 'foot-panel active-left'; }
+          else { selectedRight = s; document.getElementById('rightSelected').textContent = s; document.getElementById('rightPanel').className = 'foot-panel active-right'; }
+        }
+        updateMatch();
+      };
+      container.appendChild(btn);
+    });
+  }
+
+  function updateMatch() {
+    currentMode === 'single' ? updateSingleMatch() : updateBothMatch();
+  }
+
+  function updateSingleMatch() {
+    if (!singleFoot) { resultEl.className = 'match-result'; resultEl.innerHTML = 'Choose which foot you need a shoe for!'; return; }
+    if (!singleSize) { resultEl.className = 'match-result'; resultEl.innerHTML = '<span style="color:#666">Now pick your ' + singleFoot + ' foot size above 👆</span>'; return; }
+    const opp = singleFoot === 'left' ? 'right' : 'left';
+    const singles = fakeUsers.filter(u => u.type === 'single' && u.foot === opp && u.size === singleSize);
+    const boths = fakeUsers.filter(u => u.type === 'both' && u[opp] === singleSize);
+    const total = singles.length + boths.length;
+    resultEl.className = 'match-result found';
+    if (total > 0) {
+      resultEl.innerHTML = '<div style="margin-bottom:0.8rem">🎉 Found <span class="match-count-g">' + total + '</span> SoleMate' + (total !== 1 ? 's' : '') + ' who need the <strong style="color:var(--gold)">' + opp + '</strong> shoe!</div>'
+        + '<div style="font-size:0.85rem;color:#666;margin-bottom:0.8rem">You need: <span class="match-chip" style="border-color:var(--gold);color:var(--gold)">' + singleFoot.charAt(0).toUpperCase() + singleFoot.slice(1) + ' ' + singleSize + '</span> &nbsp;↔&nbsp; They need: <span class="match-chip" style="border-color:#4a8fff;color:#4a8fff">' + opp.charAt(0).toUpperCase() + opp.slice(1) + ' ' + singleSize + '</span></div>'
+        + '<div style="font-size:0.8rem;color:#555">' + singles.length + ' single-shoe user' + (singles.length !== 1 ? 's' : '') + ' + ' + boths.length + ' split-pair user' + (boths.length !== 1 ? 's' : '') + ' available</div>';
+    } else {
+      resultEl.innerHTML = '<div style="color:#888;margin-bottom:0.5rem">No exact matches yet for a <strong style="color:var(--gold)">' + singleFoot + ' size ' + singleSize + '</strong></div><div style="font-size:0.85rem;color:#555">Sign up and we\'ll notify you the moment a match appears. You\'re never alone in this. 🎖️</div>';
+    }
+  }
+
+  function updateBothMatch() {
+    const needLeft = !leftSkipped, needRight = !rightSkipped;
+    if (!needLeft && !needRight) { resultEl.className = 'match-result'; resultEl.innerHTML = "<span style='color:#888'>You've skipped both feet — try Single Shoe Mode instead!</span>"; return; }
+    if (needLeft && !selectedLeft) { resultEl.className = 'match-result'; resultEl.innerHTML = "<span style='color:#666'>Pick your left foot size to continue 👆</span>"; return; }
+    if (needRight && !selectedRight) { resultEl.className = 'match-result'; resultEl.innerHTML = "<span style='color:#666'>Now pick your right foot size →</span>"; return; }
+    if (!needLeft && selectedRight) {
+      const m = fakeUsers.filter(u => (u.type === 'single' && u.foot === 'left' && u.size === selectedRight) || (u.type === 'both' && u.left === selectedRight));
+      resultEl.className = 'match-result found';
+      resultEl.innerHTML = m.length > 0 ? '🎉 <span class="match-count">' + m.length + '</span> people need a Left ' + selectedRight + ' — perfect match for your Right ' + selectedRight + '!' : '<span style="color:#888">No matches yet for Right ' + selectedRight + ' only — sign up to get notified! 🔔</span>';
+      return;
+    }
+    if (!needRight && selectedLeft) {
+      const m = fakeUsers.filter(u => (u.type === 'single' && u.foot === 'right' && u.size === selectedLeft) || (u.type === 'both' && u.right === selectedLeft));
+      resultEl.className = 'match-result found';
+      resultEl.innerHTML = m.length > 0 ? '🎉 <span class="match-count">' + m.length + '</span> people need a Right ' + selectedLeft + ' — perfect match for your Left ' + selectedLeft + '!' : '<span style="color:#888">No matches yet for Left ' + selectedLeft + ' only — sign up to get notified! 🔔</span>';
+      return;
+    }
+    const perfect = fakeUsers.filter(u => u.type === 'both' && u.left === selectedRight && u.right === selectedLeft);
+    const partL = fakeUsers.filter(u => u.type === 'both' && u.left === selectedRight && u.right !== selectedLeft);
+    const partR = fakeUsers.filter(u => u.type === 'both' && u.right === selectedLeft && u.left !== selectedRight);
+    resultEl.className = 'match-result found';
+    if (perfect.length > 0) {
+      resultEl.innerHTML = '<div style="margin-bottom:0.8rem">🎉 You\'ve got <span class="match-count">' + perfect.length + '</span> perfect SoleMate' + (perfect.length !== 1 ? 's' : '') + '!</div>'
+        + '<div style="font-size:0.85rem;color:#666;margin-bottom:0.5rem">You need <span style="color:var(--lime)">Left ' + selectedLeft + '</span> + <span style="color:var(--orange)">Right ' + selectedRight + '</span> — they need the exact opposite.</div>'
+        + (partL.length + partR.length > 0 ? '<div style="font-size:0.8rem;color:#555">+' + (partL.length + partR.length) + ' partial matches also available</div>' : '');
+    } else {
+      resultEl.innerHTML = '<div style="color:#888;margin-bottom:0.5rem">No exact matches yet for Left ' + selectedLeft + ' / Right ' + selectedRight + '</div><div style="font-size:0.85rem;color:#555"><strong style="color:#aaa">' + (partL.length + partR.length) + ' partial matches</strong> are nearby — sign up to get notified! 🔔</div>';
+    }
+  }
+
+  buildGrid('leftGrid', 'left');
+  buildGrid('rightGrid', 'right');
+  buildGrid('singleGrid', 'single');
+
+  function handleSignup() {
+    const email = document.getElementById('emailInput').value;
+    const msg = document.getElementById('signupMsg');
+    if (!email || !email.includes('@')) { msg.textContent = '⚠️ Enter a valid email!'; return; }
+    msg.textContent = "🎉 You're on the list, SoleMate! We'll be in touch soon.";
+    document.getElementById('emailInput').value = '';
+  }
+</script>
+</body>
+</html>
